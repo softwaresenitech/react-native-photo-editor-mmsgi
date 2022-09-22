@@ -26,14 +26,6 @@
 
 import UIKit
 
-public protocol ZLEditImageControllerDelegate: class {
-    func onCancel()
-}
-
-extension ZLEditImageControllerDelegate {
-    func onCancel() { }
-}
-
 public class ZLEditImageModel: NSObject {
     
     public let drawPaths: [ZLDrawPath]
@@ -73,8 +65,6 @@ public class ZLEditImageViewController: UIViewController {
     static let maxDrawLineImageWidth: CGFloat = 600
     
     static let ashbinNormalBgColor = zlRGB(40, 40, 40).withAlphaComponent(0.8)
-    
-    static var delegate: ZLEditImageControllerDelegate? = nil
     
     var animateDismiss = true
     
@@ -190,8 +180,7 @@ public class ZLEditImageViewController: UIViewController {
         zl_debugPrint("ZLEditImageViewController deinit")
     }
     
-    @objc public class func showEditImageVC(parentVC: UIViewController?, animate: Bool = true, image: UIImage, editModel: ZLEditImageModel? = nil, delegate: NSObject, completion: ( (UIImage, ZLEditImageModel) -> Void )? ) {
-        self.delegate = delegate as! ZLEditImageControllerDelegate
+    @objc public class func showEditImageVC(parentVC: UIViewController?, animate: Bool = true, image: UIImage, editModel: ZLEditImageModel? = nil, completion: ( (UIImage, ZLEditImageModel) -> Void )? ) {
         let tools = ZLImageEditorConfiguration.default().editImageTools
         if ZLImageEditorConfiguration.default().showClipDirectlyIfOnlyHasClipTool, tools.count == 1, tools.contains(.clip) {
             let vc = ZLClipImageViewController(image: image, editRect: editModel?.editRect, angle: editModel?.angle ?? 0, selectRatio: editModel?.selectRatio)
@@ -285,8 +274,7 @@ public class ZLEditImageViewController: UIViewController {
         self.topShadowView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 150)
         
         self.topShadowLayer.frame = self.topShadowView.bounds
-        let iconBackSize = 32.0
-        self.cancelBtn.frame = CGRect(x: self.containerView.bounds.width - iconBackSize - 20.0 , y: insets.top + 24, width: iconBackSize, height: iconBackSize)
+        self.cancelBtn.frame = CGRect(x: 24, y: insets.top + 24, width: 32, height: 32)
         
         
         self.bottomShadowView.frame = CGRect(x: 0, y: self.view.frame.height-140-insets.bottom, width: self.view.frame.width, height: 140+insets.bottom)
@@ -589,7 +577,6 @@ public class ZLEditImageViewController: UIViewController {
     }
     
     @objc func cancelBtnClick() {
-        ZLEditImageViewController.delegate?.onCancel()
         self.dismiss(animated: self.animateDismiss, completion: nil)
     }
     
