@@ -355,14 +355,14 @@ public class ZLEditImageViewController: UIViewController {
         self.stickersContainer.frame = self.imageView.frame
         
         // Optimization for long pictures.
-        if (self.editRect.height / self.editRect.width) > (self.view.frame.height / self.view.frame.width * 1.1) {
-            let widthScale = self.view.frame.width / w
-            self.scrollView.maximumZoomScale = widthScale
-            self.scrollView.zoomScale = widthScale
-            self.scrollView.contentOffset = .zero
-        } else if self.editRect.width / self.editRect.height > 1 {
-            self.scrollView.maximumZoomScale = max(3, self.view.frame.height / h)
-        }
+        // if (self.editRect.height / self.editRect.width) > (self.view.frame.height / self.view.frame.width * 1.1) {
+        //     let widthScale = self.view.frame.width / w
+        //     self.scrollView.maximumZoomScale = widthScale
+        //     self.scrollView.zoomScale = widthScale
+        //     self.scrollView.contentOffset = .zero
+        // } else if self.editRect.width / self.editRect.height > 1 {
+        //     self.scrollView.maximumZoomScale = max(3, self.view.frame.height / h)
+        // }
         
         self.originalFrame = self.view.convert(self.containerView.frame, from: self.scrollView)
         self.isScrolling = false
