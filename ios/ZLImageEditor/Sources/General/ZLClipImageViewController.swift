@@ -804,7 +804,7 @@ class ZLClipImageViewController: UIViewController {
     }
     
     @objc func endEditing() {
-        self.moveClipContentToCenter()
+        // self.moveClipContentToCenter()
     }
     
     func startTimer() {
