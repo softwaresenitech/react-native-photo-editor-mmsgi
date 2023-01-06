@@ -321,8 +321,8 @@ class ZLClipImageViewController: UIViewController {
         self.bottomToolView.addSubview(self.cancelBtn)
         
         self.revertBtn = UIButton(type: .custom)
-//        self.revertBtn.setTitleColor(.white, for: .normal)
-//        self.revertBtn.setTitle(localLanguageTextValue(.revert), for: .normal)
+        self.revertBtn.setTitleColor(.white, for: .normal)
+        self.revertBtn.setTitle(localLanguageTextValue(.revert), for: .normal)
         self.revertBtn.zl_enlargeValidTouchArea(inset: 20)
         self.revertBtn.titleLabel?.font = ZLImageEditorLayout.bottomToolTitleFont
         self.revertBtn.addTarget(self, action: #selector(revertBtnClick), for: .touchUpInside)
